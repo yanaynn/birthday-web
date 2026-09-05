@@ -12,34 +12,40 @@ export default function MusicPlayer({ musicData, autoPlayTrigger }) {
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const audioRef = useRef(null);
   const containerRef = useRef(null);
-  const hasAppliedStartTime = useRef(false);
+  const hasSeekedToStart = useRef(false);
 
-  const applyInitialStartTime = () => {
-    if (!hasAppliedStartTime.current && musicData?.startTime && audioRef.current) {
-      try {
-        audioRef.current.currentTime = musicData.startTime;
-        hasAppliedStartTime.current = true;
-      } catch {
-        // Browser will apply once metadata or buffer is ready
+  const attemptSeek = (audio) => {
+    if (!audio || hasSeekedToStart.current || !musicData?.startTime) return;
+    try {
+      if (audio.currentTime < musicData.startTime - 1) {
+        audio.currentTime = musicData.startTime;
       }
+      if (audio.currentTime >= musicData.startTime - 1) {
+        hasSeekedToStart.current = true;
+      }
+    } catch {
+      // Browser belum siap menerima seek
     }
   };
 
   // Inisialisasi volume ke 30% (0.3)
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.3;
+      try { audioRef.current.volume = 0.3; } catch {}
     }
   }, []);
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.3;
+      try { audioRef.current.volume = 0.3; } catch {}
     }
     if (autoPlayTrigger && audioRef.current) {
-      applyInitialStartTime();
+      attemptSeek(audioRef.current);
       audioRef.current.play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          attemptSeek(audioRef.current);
+        })
         .catch(() => {});
     }
   }, [autoPlayTrigger]);
@@ -62,9 +68,12 @@ export default function MusicPlayer({ musicData, autoPlayTrigger }) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      applyInitialStartTime();
+      attemptSeek(audioRef.current);
       audioRef.current.play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          attemptSeek(audioRef.current);
+        })
         .catch(() => {});
     }
   };
@@ -83,6 +92,21 @@ export default function MusicPlayer({ musicData, autoPlayTrigger }) {
     }
   };
 
+  const handleTimeUpdate = (e) => {
+    const audio = e.currentTarget;
+    if (!hasSeekedToStart.current && musicData?.startTime) {
+      if (audio.currentTime < musicData.startTime - 1) {
+        try {
+          audio.currentTime = musicData.startTime;
+        } catch {
+          // Akan dicoba lagi pada event timeupdate berikutnya
+        }
+      } else {
+        hasSeekedToStart.current = true;
+      }
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -95,16 +119,20 @@ export default function MusicPlayer({ musicData, autoPlayTrigger }) {
         loop
         preload="auto"
         onPlay={(e) => {
-          e.currentTarget.volume = 0.3;
-          applyInitialStartTime();
+          try { e.currentTarget.volume = 0.3; } catch {}
+          attemptSeek(e.currentTarget);
+        }}
+        onPlaying={(e) => {
+          attemptSeek(e.currentTarget);
         }}
         onLoadedMetadata={(e) => {
-          e.currentTarget.volume = 0.3;
-          applyInitialStartTime();
+          try { e.currentTarget.volume = 0.3; } catch {}
+          attemptSeek(e.currentTarget);
         }}
-        onCanPlay={() => {
-          applyInitialStartTime();
+        onCanPlay={(e) => {
+          attemptSeek(e.currentTarget);
         }}
+        onTimeUpdate={handleTimeUpdate}
       />
 
       <div className="music-player-capsule">

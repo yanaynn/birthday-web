@@ -108,22 +108,7 @@ export function Hero04({
   const animate = animation === 'subtle' && !reduce
   const vs = variantStyles[variant]
 
-  const backgroundElement = washImage && (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 opacity-35 blur-3xl overflow-hidden"
-      style={{
-        maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.85) 15%, transparent 70%)',
-        WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.85) 15%, transparent 70%)',
-      }}
-    >
-      <img
-        src={washImage}
-        alt=""
-        className="h-full w-full object-cover object-center"
-      />
-    </div>
-  )
+  const backgroundElement = null
 
   const titleElement = title && (
     <div className="space-y-1">

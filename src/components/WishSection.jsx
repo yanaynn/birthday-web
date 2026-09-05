@@ -36,7 +36,6 @@ export default function WishSection({ wishData, recipientData }) {
         title={wishData?.hero?.title || "A New Chapter for"}
         titleLine2={wishData?.hero?.titleLine2 || `${recipientData?.name || recipientData?.nickname || 'My Sunshine'}`}
         description={wishData?.hero?.description || "Happy 24th Birthday! Like a sunflower that always turns towards the light, every smile you share and every sweet memory we build brings boundless warmth into my life."}
-        washImage={wishData?.hero?.washImage || "/image-wishessection/main.jpeg"}
         primaryImage={wishData?.hero?.primaryImage || "/image-wishessection/main.jpeg"}
         secondaryImage={wishData?.hero?.secondaryImage || "/image-wishessection/sub-photo.jpeg"}
         primaryAlt={wishData?.hero?.primaryAlt || `${recipientData?.nickname || recipientData?.name || 'Cimi'}'s photo`}
