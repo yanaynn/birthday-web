@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FAF9F6;
+  --color-foreground: #1C1917;
+  --color-muted: #F5F4F0;
+  --color-muted-foreground: #8C857D;
+  --color-accent: #FEF3C7;
+  --color-accent-foreground: #92400E;
+  --color-primary: #1C1917;
+  --color-primary-foreground: #FFFFFF;
+  --color-border: #E8E5E0;
+}
+
+:root {
+  /* Minimalist & Impeccable Design System Tokens */
+  --bg-canvas: #FAF9F6; /* Warm Bone / Off-White */
+  --bg-surface: #FFFFFF;
+  --bg-surface-subtle: #F6F5F2;
+  
+  /* Text & Contrast */
+  --text-primary: #1C1917; /* Deep Off-Black Warm Charcoal */
+  --text-secondary: #57534E; /* Refined Warm Gray */
+  --text-muted: #8C857D; /* Soft Muted Gray */
+  
+  /* Botanical Accents - Warm Sunflower & Sage */
+  --sunflower-amber: #D97706;
+  --sunflower-gold: #F59E0B;
+  --sunflower-light: #FEF3C7;
+  --sunflower-soft: #FBF3DB;
+  
+  --sage-deep: #3F6212;
+  --sage-muted: #4D7C0F;
+  --sage-soft: #ECFCCB;
+  --sage-light: #EDF3EC;
+  
+  /* Structural Lines & Dividers */
+  --border-subtle: #E8E5E0;
+  --border-strong: #D6D1CA;
+  
+  /* Ultra-diffuse, Natural Elevation */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.02), 0 10px 24px -8px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 20px 35px -10px rgba(0, 0, 0, 0.06);
+
+  /* Typography */
+  --font-script: 'Arizonia', cursive;
+  --font-birthstone: 'Birthstone', cursive;
+  --font-serif: 'Playfair Display', 'Newsreader', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Geist Mono', 'SF Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+}
+
+::selection {
+  background-color: #FDE68A;
+  color: #1C1917;
+}
+
+/* Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: #D6D1CA;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sunflower-amber);
+}
+
+/* Subtle background grain */
+.bg-minimal-ambient {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(245, 158, 11, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(77, 124, 15, 0.025) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Typography Utilities */
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-birthstone {
+  font-family: var(--font-birthstone);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Minimalist Editorial Cards */
+.editorial-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.editorial-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Clean Minimalist Buttons (no loud gradients or pill shapes) */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  background: #1C1917;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+  border: 1px solid #1C1917;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #332F2C;
+  border-color: #332F2C;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.88rem;
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-surface-subtle);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Status Badges & Spot Pastels */
+.badge-pastel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.badge-yellow {
+  background: var(--sunflower-soft);
+  color: #92400E;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.badge-green {
+  background: var(--sage-light);
+  color: #3F6212;
+  border: 1px solid rgba(77, 124, 15, 0.2);
+}
+
+/* Minimalist Gallery Polaroid */
+.polaroid-frame {
+  background: var(--bg-surface);
+  padding: 12px 12px 18px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.polaroid-frame:hover {
+  transform: translateY(-5px) !important;
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Interactive Candle Animations */
+@keyframes flameSoftFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+  }
+  30% {
+    transform: scale(1.05, 0.97) rotate(1deg);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(0.96, 1.04) rotate(-1.5deg);
+    opacity: 0.92;
+  }
+}
+
+.candle-flame-minimal {
+  animation: flameSoftFlicker 1.8s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes smokeDissolve {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-18px) scale(1) translateX(3px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.4) translateX(-4px);
+    opacity: 0;
+  }
+}
+
+.candle-smoke-minimal {
+  animation: smokeDissolve 1.6s ease-out forwards;
+}
+
+/* Vinyl rotation animation */
+@keyframes spinSmooth {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-rotating {
+  animation: spinSmooth 8s linear infinite;
+}
+
+.vinyl-paused {
+  animation-play-state: paused;
+}
+
+/* Mobile Layout Utilities: Margin samping lebih lebar & lega agar tidak mepet dengan tepi layar */
+@media (max-width: 640px) {
+  .main-hub-wrapper {
+    padding: 16px clamp(26px, 7.5vw, 44px) 130px clamp(26px, 7.5vw, 44px) !important;
+  }
+}
+
