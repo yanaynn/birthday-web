@@ -106,8 +106,6 @@ export function Cta({ cta }: { cta: CtaProps }) {
         'inline-flex items-center justify-center gap-2.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 shadow-sm cursor-pointer select-none active:scale-95 whitespace-nowrap',
         variant === 'default'
           ? 'bg-[#1C1917] text-white hover:bg-[#D97706] hover:shadow-md px-6 py-3'
-          : variant === 'link'
-          ? 'text-stone-500 hover:text-stone-900 underline-offset-4 text-sm font-medium py-2 px-3'
           : 'bg-stone-100 text-stone-800 hover:bg-stone-200 px-6 py-2.5',
         className,
       )}
